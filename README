@@ -1,1 +1,67 @@
-Ceci est le devoir de Jonathan et Jeff
+### Demarrer le container docker
+en mode affichage de log : docker-compose up
+en mode demon : docker-compose up -d
+
+
+### Afficher les container en cours d'execution
+docker ps
+
+
+### Rentrer dans le container docker
+docker exec -it nomducontainer bash
+
+
+### Demarrer le serveur ( pas utile car il demarre automatiquement avec le container )
+npm run world
+
+
+### Demarrer des agents programmatiques
+depuis l'interieur du container, demarrer 10 agents random : npm run agent 10 RandomAgent
+depuis l'interieur du container, demarrer 3 agents stupid : npm run agent 3 StupidAgent
+
+
+### Se connecter en telnet au serveur
+en utilisant la boucle local : telnet localhost 62342
+en utilisant une ip : telnet xxx.yyy.zzz.ttt 62342
+
+## Les commandes dans le telnet ( reconnu par le serveur )
+
+### les commandes generiques 
+pour se deconnecter : exit 
+pour arreter le serveur : stop
+pour evacuer tous les autres joueurs : flush
+
+### Les commandes de carte
+afficher la map : map
+rafraichissement automatique de la map : map on
+arret du rafraichissement de la map : map off
+changement de la vitesse de rafraichissement de la map ( en ms) : map 500
+
+
+### Les commandes de joueurs
+afficher les joueurs : players
+rafraichissement automatique des joueurs : players on
+arret du rafraichissement des joueurs : players off
+changement de la vitesse de rafraichissement de la map ( en ms) : players 500
+changement du nombre de colonnes : players cols 10
+
+### les commandes pour la boucle de jeux
+augmenter la vitesse : loop +
+diminuer la vitesse : loop -
+
+
+### les commandes de jeux 
+context : coute 1 gold et renvoie le contexte
+move north : coute 1 fuel et renvoie le contexte
+move south : coute 1 fuel et renvoie le contexte
+move east : coute 1 fuel et renvoie le contexte
+move west : coute 1 fuel et renvoie le contexte
+
+
+### Pour demarrer le mapper manuel
+- ouvrir une invite dans le container : docker exec -it nomducontainer bash
+- aller dans le dossier agents : cd agents
+- lancer le mapper : node mapper.js
+
+
+##Ceci est le devoir de Jonathan et Jeff
