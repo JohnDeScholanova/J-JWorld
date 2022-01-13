@@ -84,40 +84,41 @@ function decision(localisation) {
 
 }
 
-
-
-function findNext({position: p, map}) {
-	var lst = getNext({position: p, map});
-	var visited = {};
-	var np;
-	while (lst.length) {
-		np = lst.shift();
-		if ( visited[np.x + '-' + np.y] )
+function findNext({position: p, map}){
+	var liste = getNext({position:p ,map});
+	var visite = {};
+	let nouvelle_position;
+	for (let i=0;i<liste.length;i++){
+		nouvelle_position = liste[i];
+		if(visite[nouvelle_position.x + '-' + nouvelle_position.y]){
 			continue;
-		visited[np.x + '-' + np.y] = true;
-		if (!map[np.y][np.x].visited)
-			return np.move;
-		else
-			lst = lst.concat(getNext({position: np, map}, np.move));
+		}else{
+			visite[nouvelle_position.x + '-' + nouvelle_position.y] =true;
+			if(map[nouvelle_position.y][nouvelle_position.x].visite == true){
+				liste = getNext({position: nouvelle_position, map}, nouvelle_position.move);
+			}else{
+				return nouvelle_position.move;
+			}
+		}
 	}
 	process.exit();
 }
 
 function getNext({position: p, map}, firstMove) {
 	var lst = [];
-
-	if ( map[p.y][p.x - 1].type != 'wall' )
+	
+	if ( map[p.y][p.x - 1].type != 'wall' ){
 		lst.push({x: p.x - 1, y: p.y, move: firstMove || "west"});
-
-	if ( map[p.y - 1][p.x].type != 'wall' )
+	}
+	if ( map[p.y - 1][p.x].type != 'wall' ){
 		lst.push({x: p.x, y: p.y - 1, move: firstMove || "north"});
-
-	if ( map[p.y][p.x + 1].type != 'wall' )
+	}
+	if ( map[p.y][p.x + 1].type != 'wall' ){
 		lst.push({x: p.x + 1, y: p.y, move: firstMove || "east"});
-
-	if ( map[p.y + 1][p.x].type != 'wall' )
+	}
+	if ( map[p.y + 1][p.x].type != 'wall' ){
 		lst.push({x: p.x, y: p.y + 1, move: firstMove || "south"});
-
+	}
 	return lst;
 }
 
