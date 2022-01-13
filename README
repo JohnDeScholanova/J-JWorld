@@ -63,8 +63,3 @@ move west : coute 1 fuel et renvoie le contexte
 - aller dans le dossier agents : cd agents
 - lancer le mapper : node mapper.js
 
-
-
-##Ceci est le devoir de Jonathan et Jeff
-
-Exercice 1
