@@ -89,11 +89,12 @@ function findNext({position: p, map}){
 	var visite = {};
 	let nouvelle_position;
 	for (let i=0;i<liste.length;i++){
+		// console.log(liste[i]);
 		nouvelle_position = liste[i];
 		if(visite[nouvelle_position.x + '-' + nouvelle_position.y]){
 			continue;
 		}else{
-			visite[nouvelle_position.x + '-' + nouvelle_position.y] =true;
+			visite[nouvelle_position.x + '-' + nouvelle_position.y] = true;
 			if(map[nouvelle_position.y][nouvelle_position.x].visite == true){
 				liste = getNext({position: nouvelle_position, map}, nouvelle_position.move);
 			}else{
@@ -107,18 +108,50 @@ function findNext({position: p, map}){
 function getNext({position: p, map}, firstMove) {
 	var lst = [];
 	
-	if ( map[p.y][p.x - 1].type != 'wall' ){
-		lst.push({x: p.x - 1, y: p.y, move: firstMove || "west"});
+	if ( map[p.y][p.x - 1].type != 'wall'){
+		// console.log(map[p.y][p.x - 1]);
+		if(map[p.y][p.x - 1].visited == false){
+			// console.log("test20");
+			lst.push({x: p.x - 1, y: p.y, move: firstMove || "west"});
+		}else if(typeof(map[p.y][p.x - 1].visited) == "undefined"){
+			// console.log("OKAY");
+			lst.push({x: p.x - 1, y: p.y, move: firstMove || "west"});
+		}
+		
 	}
-	if ( map[p.y - 1][p.x].type != 'wall' ){
-		lst.push({x: p.x, y: p.y - 1, move: firstMove || "north"});
+	if ( map[p.y - 1][p.x].type != 'wall'){
+		if(map[p.y - 1][p.x].visited == false){
+			lst.push({x: p.x, y: p.y - 1, move: firstMove || "north"});
+		}else if(typeof(map[p.y - 1][p.x].visited) == "undefined"){
+			// console.log("OKAY");
+			lst.push({x: p.x, y: p.y - 1, move: firstMove || "north"});
+		}
+		
 	}
-	if ( map[p.y][p.x + 1].type != 'wall' ){
-		lst.push({x: p.x + 1, y: p.y, move: firstMove || "east"});
+	if ( map[p.y][p.x + 1].type != 'wall'){
+		if(map[p.y][p.x + 1].visited == false){
+			lst.push({x: p.x + 1, y: p.y, move: firstMove || "east"});
+		}else if(typeof(map[p.y][p.x + 1].visited) == "undefined"){
+			// console.log("OKAY");
+			lst.push({x: p.x + 1, y: p.y, move: firstMove || "east"});
+		}
+		
 	}
 	if ( map[p.y + 1][p.x].type != 'wall' ){
-		lst.push({x: p.x, y: p.y + 1, move: firstMove || "south"});
+		if(map[p.y + 1][p.x].visited == false){
+			// console.log("test2");
+			lst.push({x: p.x, y: p.y + 1, move: firstMove || "south"});
+		}else if(typeof( map[p.y + 1][p.x].visited) == "undefined"){
+			// console.log("OKAY");
+			lst.push({x: p.x, y: p.y + 1, move: firstMove || "south"});
+		}
+		
 	}
+	// console.log(map);
+	// console.log(map[p.y][p.x - 1]);
+	// console.log(map[p.y - 1][p.x]);
+	// console.log(map[p.y][p.x + 1]);
+	// console.log(map[p.y][p.x + 1]);
 	return lst;
 }
 
